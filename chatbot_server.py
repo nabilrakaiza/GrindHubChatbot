@@ -9,7 +9,7 @@ app = Flask(__name__)
 # Initialize Socket.IO server
 # IMPORTANT: Adjust cors_allowed_origins to your React Native app's IP/port
 # For development, you can use "*" but for production, specify exact origins.
-sio = SocketIO(app, cors_allowed_origins="*", async_mode='gevent')
+sio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 
 @app.route('/')
 def index():
