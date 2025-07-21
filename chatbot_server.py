@@ -2,7 +2,7 @@ import socketio
 from flask import Flask, jsonify, request
 from flask_socketio import SocketIO, emit
 from datetime import datetime
-from .chatbot.core import process_message  # Assuming you have a function to process messages
+from chatbot.core import process_message  # Assuming you have a function to process messages
 
 # Initialize Flask app
 app = Flask(__name__)
