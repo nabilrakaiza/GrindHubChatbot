@@ -15,12 +15,12 @@ from langchain.chains import ConversationChain
 import requests
 import os
 
-from AI_Agents.general_information import GeneralInformation
-from AI_Agents.greeting_farewell import GreetingFarewell
-from AI_Agents.motivation_stress_support import MotivationStressSupport
-from AI_Agents.performance_assignment_query import PerformanceAssignmentQuery
-from AI_Agents.study_plan_request import StudyPlanRequest
-from AI_Agents.others import Others
+from .AI_Agents.general_information import GeneralInformation
+from .AI_Agents.greeting_farewell import GreetingFarewell
+from .AI_Agents.motivation_stress_support import MotivationStressSupport
+from .AI_Agents.performance_assignment_query import PerformanceAssignmentQuery
+from .AI_Agents.study_plan_request import StudyPlanRequest
+from .AI_Agents.others import Others
 from helpers import *
 
 class UserIntent(BaseModel):
