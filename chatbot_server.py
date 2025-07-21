@@ -1,7 +1,8 @@
 import socketio
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_socketio import SocketIO, emit
 from datetime import datetime
+from chatbot.core import process_message
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -16,11 +17,11 @@ def index():
     return jsonify({"status": "Socket.IO server is running"})
 
 @sio.event
-def connect(sid, environ):
+def connect():
     """Event handler for new client connections."""
-    print(f"Client connected: {sid}")
+    print(f"Client connected: {request.sid}")
     # You can send a welcome message immediately upon connection
-    emit('chat_message', {'sender': 'Bot', 'message': 'Hello! How can I help you today?'}, room=sid)
+    emit('chat_message', {'sender': 'Bot', 'message': 'Hello! How can I help you today?'}, room=request.sid)
 
 @sio.event
 def disconnect(sid):
@@ -36,16 +37,18 @@ def user_message(sid, data):
     user_input = data.get('message', '').strip()
     print(f"Message from {sid}: {user_input}")
 
+    bot_response = process_message(user_message=user_input)
+
     # Simulate chatbot processing
-    bot_response = "I'm sorry, I don't understand that yet."
-    if "hello" in user_input.lower():
-        bot_response = "Hi there! I'm your GrindHub AI assistant."
-    elif "schedule" in user_input.lower():
-        bot_response = "I can help you with your schedule. What date are you looking for?"
-    elif "assignment" in user_input.lower():
-        bot_response = "For assignments, you can check the 'Your Assignments' section on your homepage. What specific assignment are you curious about?"
-    elif "thank you" in user_input.lower():
-        bot_response = "You're welcome! Happy to help."
+    # bot_response = "I'm sorry, I don't understand that yet."
+    # if "hello" in user_input.lower():
+    #     bot_response = "Hi there! I'm your GrindHub AI assistant."
+    # elif "schedule" in user_input.lower():
+    #     bot_response = "I can help you with your schedule. What date are you looking for?"
+    # elif "assignment" in user_input.lower():
+    #     bot_response = "For assignments, you can check the 'Your Assignments' section on your homepage. What specific assignment are you curious about?"
+    # elif "thank you" in user_input.lower():
+    #     bot_response = "You're welcome! Happy to help."
 
     # Send the bot's response back to the client
     emit('chat_message', {'sender': 'Bot', 'message': bot_response}, room=sid)
