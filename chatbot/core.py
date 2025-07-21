@@ -150,13 +150,29 @@ def save_ai_agent_response():
     """
     pass
 
-def process_message():
+def process_message(user_message: str, context: str = None):
     """
     This function will be the main function of the chatbot feature.
     It will handle the user message, intent classification, delegation to specific AI agent,
     and sending the message to the user.
     """
-    pass
+    intent = classify_intent(user_message=user_message)
+    response = delegation_to_specific_ai_agent(intent=intent, user_message=user_message, context=context)
+    context = call_llm_text_response(
+        prompt_template="""Summarise the following conversation between a user and a chatbot AI Agent. Please make sure that current context is included in the summary.
+        context : {context}
+        user_message : {user_message}
+        chatbot response : {response}""",
+        params={
+            "context": context,
+            "user_message": user_message,
+            "response": response
+        }
+    ) ## update context to database after every chatbot response?, and reset context to empty if no message from user for 30 minutes ?
+    # so there will be a database dedicated to holding the context of the conversation, and delete the context if no message from user for 30 minutes
+    print(context, intent)
+
+    return response
 
 def local_test():
     """
