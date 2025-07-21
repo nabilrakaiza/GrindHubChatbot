@@ -28,15 +28,16 @@ def disconnect(sid):
     print(f"Client disconnected: {sid}")
 
 @sio.event
-def user_message(sid, data):
+def user_message(data):
     """
     Event handler for messages received from the client.
     'data' is expected to be an object like: { 'message': 'User\'s input' }
     """
+    sid = request.sid
     user_input = data.get('message', '').strip()
     print(f"Message from {sid}: {user_input}")
 
-    # bot_response = process_message(user_message=user_input)
+    # bot_response = process_message(user_message=user_in put)
 
     # Simulate chatbot processing
     bot_response = "I'm sorry, I don't understand that yet."
