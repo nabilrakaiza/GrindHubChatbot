@@ -21,7 +21,7 @@ from .AI_Agents.motivation_stress_support import MotivationStressSupport
 from .AI_Agents.performance_assignment_query import PerformanceAssignmentQuery
 from .AI_Agents.study_plan_request import StudyPlanRequest
 from .AI_Agents.others import Others
-from helpers import *
+from .helpers import *
 
 class UserIntent(BaseModel):
     """
