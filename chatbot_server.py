@@ -39,9 +39,7 @@ def user_message(data):
     print(f"Message from {sid}: {user_input}")
     
     context = data.get('context', '')  # Optional context for the message
-
-    print(context)
-    print(type(context))
+    context = context[-4:]
 
     bot_response = process_message(user_message=user_input, context=context)
 
