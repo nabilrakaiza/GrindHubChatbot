@@ -40,6 +40,9 @@ def user_message(data):
     
     context = data.get('context', '')  # Optional context for the message
 
+    print(context)
+    print(type(context))
+
     bot_response = process_message(user_message=user_input, context=context)
 
     # Simulate chatbot processing
