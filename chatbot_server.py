@@ -37,6 +37,7 @@ def user_message(data):
     sid = request.sid
     user_input = data.get('message', '').strip()
     print(f"Message from {sid}: {user_input}")
+    print(data)
 
     bot_response = process_message(user_message=user_input)
 
