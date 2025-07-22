@@ -37,9 +37,10 @@ def user_message(data):
     sid = request.sid
     user_input = data.get('message', '').strip()
     print(f"Message from {sid}: {user_input}")
-    print(data)
+    
+    context = data.get('context', '')  # Optional context for the message
 
-    bot_response = process_message(user_message=user_input)
+    bot_response = process_message(user_message=user_input, context=context)
 
     # Simulate chatbot processing
     # bot_response = "I'm sorry, I don't understand that yet."
