@@ -21,7 +21,7 @@ def connect():
     """Event handler for new client connections."""
     print(f"Client connected: {request.sid}")
     # You can send a welcome message immediately upon connection
-    emit('chat_message', {'sender': 'Bot', 'message': 'Hello! How can I help you today?'}, room=request.sid)
+    # emit('chat_message', {'sender': 'Bot', 'message': 'Hello! How can I help you today?'}, room=request.sid)
 
 @sio.event
 def disconnect(sid):
